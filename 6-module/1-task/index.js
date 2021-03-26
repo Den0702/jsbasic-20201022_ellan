@@ -30,5 +30,23 @@
  */
 export default class UserTable {
   constructor(rows) {
+    this.elem = rows;
+  }
+  createTable() {
+    this.table = document.body.createElement('table');
+    let table = this.table;
+    table.append(elem);
+    elem.insertAdjacentHTML('afterbegin', `
+      <tr>
+      <th>Имя</th>
+      <th>Возраст</th>
+      <th>Зарплата</th>
+      <th>Город</th>
+      <th></th>
+      </tr>
+    `);
+    this.elem.forEach(row => {
+      table.innerHTML += `${row['name']} ${row['age']} ${row['salary']}`;
+    });
   }
 }

@@ -9,31 +9,28 @@ function initCarousel() {
   let currentSlideNumber = 1;
   const slidesAmount = 4;
 
-  container.onclick = ({target}) => {
+  container.addEventListener('click', ({target}) => {
     if (target.closest('.carousel__arrow_right')) {
       if (currentSlideNumber < 4) {
         right();
         update(); 
         leftArrow.style.display = '';
-      } 
-      if (currentSlideNumber == slidesAmount) {
+      
+      } else {
         rightArrow.style.display = 'none';
       } 
-    }
-  };
-
-  container.onclick = ({target}) => {
-    if(target.closest('.carousel__arrow_left')) {
+      
+    } else if (target.closest('.carousel__arrow_left')) {
       if (currentSlideNumber > 1) {
         left();
         update();
         rightArrow.style.display = '';
-      } 
-      if (currentSlideNumber == 1) {
+      
+      } else {
         leftArrow.style.display = 'none';
       }
-    } 
-  };
+    }
+  });
   
   function left() {
     position += shift;
