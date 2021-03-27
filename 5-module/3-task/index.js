@@ -6,7 +6,7 @@ function initCarousel() {
   leftArrow.style.display = 'none';
   const shift = carouselInner.offsetWidth;
   let position = 0;
-  let currentSlideNumber = 1;
+  let currentSlideNumber = 0;
   const slidesAmount = 4;
 
   container.addEventListener('click', ({target}) => {
@@ -16,19 +16,21 @@ function initCarousel() {
         update(); 
         leftArrow.style.display = '';
       
-      } else {
+      } 
+      if (currentSlideNumber === slidesAmount - 1) {
         rightArrow.style.display = 'none';
       } 
       
     } else if (target.closest('.carousel__arrow_left')) {
-      if (currentSlideNumber > 1) {
+      if (currentSlideNumber > 0) {
         left();
         update();
         rightArrow.style.display = '';
-      
-      } else {
+      } 
+      if (currentSlideNumber === 0) {
         leftArrow.style.display = 'none';
       }
+        
     }
   });
   
