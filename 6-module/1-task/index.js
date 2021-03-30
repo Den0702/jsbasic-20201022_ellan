@@ -30,23 +30,54 @@
  */
 export default class UserTable {
   constructor(rows) {
-    this.elem = rows;
-  }
-  createTable() {
-    this.table = document.body.createElement('table');
-    let table = this.table;
-    table.append(elem);
-    elem.insertAdjacentHTML('afterbegin', `
-      <tr>
-      <th>Имя</th>
-      <th>Возраст</th>
-      <th>Зарплата</th>
-      <th>Город</th>
-      <th></th>
-      </tr>
+    this.rows = rows;
+    this.elem = document.createElement('table');
+    this.elem.insertAdjacentHTML('afterbegin', `
+      <thead>
+        <tr>
+          <th>Имя</th>
+          <th>Возраст</th>
+          <th>Зарплата</th>
+          <th>Город</th>
+          <th></th>
+        </tr>
+      </thead>
+      
     `);
-    this.elem.forEach(row => {
-      table.innerHTML += `${row['name']} ${row['age']} ${row['salary']}`;
+
+    let innerTable = this.rows.map(row => {
+      let cellsOfTheRow = Object.values(row)
+                       .map(value => `<td>${value}</td>`)
+                       .join('');
+      return `<tr>
+              ${cellsOfTheRow}
+              <td><button>X</button></td>
+             </tr>
+            `;
     });
+
+    this.elem.innerHTML += `<tbody>
+                              ${innerTable.join('')}
+                            </tbody>`;
+    this.elem.addEventListener('click', this.onClick);
   }
+
+  onClick(event) {
+    let target = event.target; //let, bo referencja do target'a później się zmienia
+    
+    if (target.tagName !== 'BUTTON') {
+      return;
+    }
+    
+    /* while (target = target.parentElement) {
+      if (target.tagName === 'TR') {
+        target.hidden = 'true';
+        break;
+      }
+    } */
+    let tr = target.closest('tr');
+    tr.remove();
+    
+  }
+  
 }
