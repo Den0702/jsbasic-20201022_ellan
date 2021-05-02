@@ -68,7 +68,7 @@ export default class UserTable {
     if (target.tagName !== 'BUTTON') {
       return;
     }
-    
+   
     /* while (target = target.parentElement) {
       if (target.tagName === 'TR') {
         target.hidden = 'true';
