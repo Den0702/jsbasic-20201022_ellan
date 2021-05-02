@@ -9,13 +9,12 @@ function initCarousel() {
   let currentSlideNumber = 0;
   const slidesAmount = 4;
 
-  container.addEventListener('click', ({target}) => {
-    if (target.closest('.carousel__arrow_right')) {
-      if (currentSlideNumber < 4) {
+  container.addEventListener('click', (event) => {
+    if (event.target.closest('.carousel__arrow_right')) {
+      if (currentSlideNumber < slidesAmount) {
         right();
         update(); 
         leftArrow.style.display = '';
-      
       } 
       if (currentSlideNumber === slidesAmount - 1) {
         rightArrow.style.display = 'none';
